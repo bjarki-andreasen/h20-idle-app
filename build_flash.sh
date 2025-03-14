@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # Usage:
 #
 #     Call from workspace folder:
@@ -13,7 +12,7 @@
 
 set -e
 
-if [ $1 == recover ]; then
+if [ $1 == 'recover' ]; then
     if [ $# != 2 ]; then
         echo 'please provide serial number from listed devices:'
         echo ''
@@ -28,7 +27,7 @@ if [ $1 == recover ]; then
 fi
 
 # Build app
-west build -p -b nrf54h20dk/nrf54h20/cpuapp --no-sysbuild go_idle
+west build -p -b nrf54h20dk/nrf54h20/cpuapp --no-sysbuild h20-idle-app
 
 # Flash BICR if recover
 if [ $1 == recover ]; then
@@ -39,7 +38,7 @@ fi
 west flash
 
 # Build and flash cpurad
-west build -p -b nrf54h20dk/nrf54h20/cpurad --no-sysbuild go_idle
+west build -p -b nrf54h20dk/nrf54h20/cpurad --no-sysbuild h20-idle-app
 west flash
 
 echo 'done'
